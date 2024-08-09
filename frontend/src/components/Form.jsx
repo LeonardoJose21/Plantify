@@ -22,7 +22,7 @@ const AuthForm = ({ method, route }) => {
     setLoading(true);
     e.preventDefault();
 
-   
+
     let payload;
     if (method === "login") {
       payload = {
@@ -32,15 +32,11 @@ const AuthForm = ({ method, route }) => {
       };
     } else {  // Assuming method === "register"
       payload = {
-        user: {
-          username,
-          email,
-          password,
-        },
-        nivel_actual: 1,
-        nombre,
-        sexo,
-        carrera,
+        username,
+        email,
+        password,
+        first_name,
+        last_name,
       };
     }
     // console.log("Payload:", payload);

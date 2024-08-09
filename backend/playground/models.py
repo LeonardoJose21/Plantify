@@ -1,26 +1,11 @@
 # models.py
-
 from django.db import models
+from django.contrib.auth.models import User
 
-class CodingProblem(models.Model):
-    DIFICULTAD_CHOICES = [
-        ('facil', 'Fácil'),
-        ('medio', 'Medio'),
-        ('dificil', 'Difícil')
-    ]
-    
-    LENGUAJE_CHOICES = [
-        ('cpp', 'C++'),
-        ('python', 'Python'),
-        ('java', 'Java')
-    ]
-
-    id_problema = models.AutoField(primary_key=True)
-    problema = models.TextField()
-    dificultad = models.CharField(max_length=10, choices=DIFICULTAD_CHOICES)
-    tema = models.CharField(max_length=100)
-    lenguaje = models.CharField(max_length=10, choices=LENGUAJE_CHOICES)  # New field
+class Templates(models.Model):
+    id_template = models.AutoField(primary_key=True)
+    date_created = models.DateTimeField(auto_now_add=True)  # Automatically set the field to now when the object is first created
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE)  # ForeignKey to User model
 
     def __str__(self):
-        return f"{self.tema} ({self.dificultad})"
-
+        return f"{self.date_created} ({self.id_user})"
