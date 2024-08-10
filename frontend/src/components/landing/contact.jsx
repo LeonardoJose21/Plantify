@@ -3,7 +3,7 @@ import { PhoneIcon } from '@heroicons/react/24/solid';
 
 export default function Contacto() {
   return (
-    <section id="contact" className="flex flex-col p-6 bg-slate-900 text-white text-center h-screen">
+    <section id="contact" className="flex flex-col p-6 bg-slate-900 text-white text-center h-screen justify-center">
       <h2 className="text-3xl font-bold mb-6">Contacto</h2>
       <p className="text-lg mb-6">
         Si tienes alguna pregunta o necesitas ayuda, no dudes en ponerte en contacto con nosotros.

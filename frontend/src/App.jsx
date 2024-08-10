@@ -27,50 +27,19 @@ function RegisterAndLogout() {
 }
 
 function App() {
-  const [user, setUser] = useState({
-    name: '',
-    career: '',
-    isLoggedIn: false,
-  });
-
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem(ACCESS_TOKEN);
-      if (!token) {
-        console.error('No token found. Please log in.');
-        return;
-      }
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    if (token) {
+      setUserIsLoggedIn(true);
+    }
 
-      try {
-        const response = await axios.get(import.meta.env.VITE_API_URL + 'api/user/', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        const data = await response.data;
-
-        setUser({
-          name: data.nombre,
-          career: data.carrera,
-          isLoggedIn: true,
-        });
-
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        setUser(prevState => ({ ...prevState, isLoggedIn: false }));
-      }
-    };
-
-    fetchUserData();
   }, []);
 
   return (
     <BrowserRouter>
-      <Header user={user} onLogout={LogOut} />
+      <Header userIsLoggedIn={userIsLoggedIn} onLogout={LogOut} />
       <Routes>
         <Route
           path="/"

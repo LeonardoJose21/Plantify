@@ -26,9 +26,14 @@ module.exports = {
             transform: "translateY(0)",
           },
         },
+        "spin": {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         "fade-in-out": "fade-in-out 5s ease-in-out infinite",
+        "spin": 'spin 1s linear infinite',
       },
     },
   },

@@ -8,15 +8,15 @@ export default function Caracteristicas() {
       <ul className="list-none space-y-4 md:w-1/2 rounded p-3 text-left">
         <li className="flex items-center space-x-2 animate-fade-in-out" style={{ animationDelay: '0s' }}>
           <CheckIcon className="w-6 h-6 text-green-400" />
-          <span>Resolución de problemas de programación asistida por IA.</span>
+          <span>Interfaz fácil de usar, sin necesidad de conocimientos técnicos.</span>
         </li>
         <li className="flex items-center space-x-2 animate-fade-in-out" style={{ animationDelay: '0.2s' }}>
           <CheckIcon className="w-6 h-6 text-green-400" />
-          <span>Evaluación automática de soluciones.</span>
+          <span>Plantillas personalizables para adaptarse a cualquier negocio.</span>
         </li>
         <li className="flex items-center space-x-2 animate-fade-in-out" style={{ animationDelay: '0.4s' }}>
           <CheckIcon className="w-6 h-6 text-green-400" />
-          <span>Acceso a una amplia gama de problemas de diferentes niveles de dificultad.</span>
+          <span>Descarga inmediata y sin complicaciones.</span>
         </li>
         <li className="flex items-center space-x-2 animate-fade-in-out" style={{ animationDelay: '0.6s' }}>
           <CheckIcon className="w-6 h-6 text-green-400" />
@@ -24,7 +24,7 @@ export default function Caracteristicas() {
         </li>
         <li className="flex items-center space-x-2 animate-fade-in-out" style={{ animationDelay: '0.8s' }}>
           <CheckIcon className="w-6 h-6 text-green-400" />
-          <span>Seguimiento del progreso individual.</span>
+          <span>Ahorro de tiempo y dinero en la gcreación de inventarios.</span>
         </li>
       </ul>
     </section>

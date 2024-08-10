@@ -13,10 +13,9 @@ export default function LandingPage() {
               id='hero' 
               className="flex flex-col justify-center items-center h-auto md:h-screen pt-16 md:pt-0" // Added padding-top for small screens
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Mejora tus habilidades de programación</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Transforma tu negocio con herramientas a tu medida</h2>
               <p className="text-base md:text-lg mb-6 text-center max-w-2xl">
-                Bienvenidos a SinúCode, la plataforma donde los estudiantes de ingeniería de la Universidad del Sinú
-                pueden practicar sus habilidades de programación con la asistencia de inteligencia artificial.
+              Crea automáticamente aplicaciones y plantillas de inventario en Excel sin necesidad de contratar expertos.
               </p>
               <a href="/" className="bg-green-600 text-white py-3 px-6 rounded-lg text-base md:text-lg hover:bg-green-700">
                 Comienza Ahora

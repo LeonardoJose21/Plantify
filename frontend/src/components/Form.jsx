@@ -10,9 +10,8 @@ const AuthForm = ({ method, route }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [nombre, setNombre] = useState("");
-  const [sexo, setSexo] = useState("M");
-  const [carrera, setCarrera] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const navigate = useNavigate();
   const username = email;
 
@@ -85,37 +84,25 @@ const AuthForm = ({ method, route }) => {
       {method === "register" && (
         <>
           <div>
-            <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">Nombre</label>
+            <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">Primer Nombre</label>
             <Input
               id="nombre"
               className="form-input block w-full p-2 border border-gray-300 rounded"
               type="text"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              placeholder="Nombre"
+              value={first_name}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="Primer Nombre"
             />
           </div>
           <div>
-            <label htmlFor="sexo" className="block text-sm font-medium text-gray-700">Sexo</label>
-            <select
-              id="sexo"
-              className="form-input block w-full p-2 border border-gray-300 rounded"
-              value={sexo}
-              onChange={(e) => setSexo(e.target.value)}
-            >
-              <option value="M">Masculino</option>
-              <option value="F">Femenino</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="carrera" className="block text-sm font-medium text-gray-700">Carrera</label>
+            <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">Primer Apellido</label>
             <Input
-              id="carrera"
+              id="nombre"
               className="form-input block w-full p-2 border border-gray-300 rounded"
               type="text"
-              value={carrera}
-              onChange={(e) => setCarrera(e.target.value)}
-              placeholder="Carrera"
+              value={last_name}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Primer Apellido"
             />
           </div>
         </>

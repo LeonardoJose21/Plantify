@@ -1,22 +1,25 @@
-# SinúCode
-SinúCode es una aplicación web diseñada para ayudar a los estudiantes de ingeniería de la Universidad del Sinú a practicar y mejorar sus habilidades de programación. La aplicación utiliza tecnologías web modernas y APIs para crear un entorno de aprendizaje interactivo y de apoyo.
+# Plantify
+
+## Descripción
+
+Plantify es una aplicación web impulsada por inteligencia artificial, diseñada para ayudar a los emprendedores colombianos a crear automáticamente aplicaciones y plantillas de Excel para la gestión de inventarios. Sin necesidad de conocimientos técnicos ni de invertir grandes cantidades de dinero, los usuarios pueden obtener herramientas personalizadas que facilitan la administración de sus negocios.
 
 ## Características
-* **Práctica de Programación:** SinúCode permite a los estudiantes resolver problemas de programación en varios lenguajes, ayudándolos a mejorar sus habilidades de codificación.
 
-* **Asistencia con IA:** La aplicación se integra con la API de ChatGPT para proporcionar sugerencias, explicaciones y retroalimentación sobre las soluciones de código.
-
-* **Ejecución de Código:** SinúCode utiliza la API de JDoodle para ejecutar código en tiempo real, soportando múltiples lenguajes de programación.
-
-* **Interfaz Interactiva:** Construido con React y Vite, el frontend está diseñado para ser responsive y fácil de usar.
+- Generación automática de plantillas y aplicaciones en Excel.
+- Interfaz fácil de usar, sin necesidad de conocimientos técnicos.
+- Plantillas personalizables para adaptarse a cualquier negocio.
+- Descarga inmediata y sin complicaciones.
+- Ahorro de tiempo y dinero en la gestión de inventarios.
 
 ## Tecnologías Utilizadas
 
-* Backend: Django
-* Base de Datos: SQLite
-* Frontend: React con Vite
-* Estilos: Shadcn
-* APIs: JDoodle, ChatGPT
+- **Backend:** Django y la biblioteca `promxl`
+- **Base de Datos:** SQLite
+- **Frontend:** React con Vite
+- **Estilos:** Shadcn y Tailwind CSS
+- **APIs:** ChatGPT
 
 ## Propósito
-El objetivo de esta aplicación es apoyar a los estudiantes en su proceso de aprendizaje y está basada en mi experiencia (Leonardo Pastrana) tras trabajar durante un año como Monitor en la Universidad del Sinú.
+
+El propósito de Plantify es empoderar a los pequeños empresarios colombianos con herramientas tecnológicas accesibles y efectivas, que les permitan gestionar sus negocios de manera eficiente. Con esta aplicación, cualquier persona, independientemente de su experiencia técnica, puede obtener soluciones personalizadas para la administración de inventarios, ayudándoles a ahorrar tiempo y dinero mientras se enfocan en el crecimiento de su negocio.
