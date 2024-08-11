@@ -1,5 +1,6 @@
 import React from 'react';
 import {Lock} from "lucide-react";
+import {Button } from "@/components/ui/button"
 
 export default function FinalResult({ seconStepCompleted }) {
     const handleDownload = () => {
@@ -18,12 +19,12 @@ export default function FinalResult({ seconStepCompleted }) {
     return (
         seconStepCompleted ? (
             <div className='flex flex-auto items-center space-x-4'>
-                <span>Aquí está su plantilla:</span>
-                <button
+                <span>Listo! Ya está lista tu plantilla</span>
+                <Button
                     onClick={handleDownload}
                     className="px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    Descargar
-                </button>
+                    Descargar mi platilla
+                </Button>
             </div>
         ) : (
             <div className="flex items-center space-x-2 p-4">

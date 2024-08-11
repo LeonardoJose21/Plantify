@@ -6,7 +6,7 @@ import FinalResult from '../components/FinalResult';
 export default function Home() {
   const [bizName, setBizName] = useState('');
   const [requirements, setRequirements] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState(new Set());
+  const [dataForPrompt, setDataForPrompt] = useState('');
   const [firstStepCompleted, setFirstStepCompleted] = useState(false);
   const [secondStepCompleted, setSecondStepCompleted] = useState(false);
 
@@ -21,11 +21,17 @@ export default function Home() {
             setBizName={setBizName}
             setRequirements={setRequirements}
             setFirstStepCompleted={setFirstStepCompleted}
+            setDataForPrompt={setDataForPrompt}
           />
-          <h2 className="text-xl font-semibold mb-4">2. Funcionalidades de su plantilla/app en Excel
+          <h2 className="text-xl font-semibold mb-4">2. Creación de su plantilla de inventario en Excel
           </h2>
-          <AppFeatures firstStepIsCompleted={firstStepCompleted} setSecondStepIsCompleted={setSecondStepCompleted} />
-          <h2 className="text-xl font-semibold mb-4">3. Plantilla final
+          <AppFeatures 
+          firstStepIsCompleted={firstStepCompleted} 
+          setSecondStepIsCompleted={setSecondStepCompleted} 
+          dataForPrompt={dataForPrompt}
+          bizname={bizName}
+          requeriments={requirements}/>
+          <h2 className="text-xl font-semibold mb-4">3. Resultado final
           </h2>
           <FinalResult seconStepCompleted={secondStepCompleted}/>
         </div>
