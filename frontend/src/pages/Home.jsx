@@ -18,9 +18,7 @@ export default function Home() {
           <StoreData
             bizName={bizName}
             requirements={requirements}
-            selectedCategories={selectedCategories}
             setBizName={setBizName}
-            setSelectedCategories={setSelectedCategories}
             setRequirements={setRequirements}
             setFirstStepCompleted={setFirstStepCompleted}
           />
