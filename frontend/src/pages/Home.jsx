@@ -9,6 +9,7 @@ export default function Home() {
   const [dataForPrompt, setDataForPrompt] = useState('');
   const [firstStepCompleted, setFirstStepCompleted] = useState(false);
   const [secondStepCompleted, setSecondStepCompleted] = useState(false);
+  const [code, setCode] = useState('');
 
   return (
     <div className="flex flex-col text-slate-900">
@@ -29,8 +30,8 @@ export default function Home() {
           firstStepIsCompleted={firstStepCompleted} 
           setSecondStepIsCompleted={setSecondStepCompleted} 
           dataForPrompt={dataForPrompt}
-          bizname={bizName}
-          requeriments={requirements}/>
+          code={code}
+          setCode={setCode}/>
           <h2 className="text-xl font-semibold mb-4">3. Resultado final
           </h2>
           <FinalResult seconStepCompleted={secondStepCompleted}/>
