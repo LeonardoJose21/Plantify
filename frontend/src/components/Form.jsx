@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api'; // Adjust the path as necessary
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants'; // Adjust the path as necessary
 import LoadingIndicator from '@/components/LoadingIndicator'; // Adjust the path as necessary
+import { Loader2 } from 'lucide-react';
 
 const AuthForm = ({ method, route }) => {
   const [email, setEmail] = useState("");
@@ -107,7 +108,7 @@ const AuthForm = ({ method, route }) => {
           </div>
         </>
       )}
-      {loading && <LoadingIndicator />}
+      {loading && <Loader2 className='mx-auto' />}
       <Button
         className="form-button w-full p-2"
         type="submit"

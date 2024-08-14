@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StoreData from '../components/StoreData';
 import AppFeatures from '../components/AppFeatures';
 import FinalResult from '../components/FinalResult';
+import { ACCESS_TOKEN } from '../constants';
+import axios from 'axios';
 
 export default function Home() {
   const [bizName, setBizName] = useState('');
@@ -10,6 +12,25 @@ export default function Home() {
   const [firstStepCompleted, setFirstStepCompleted] = useState(false);
   const [secondStepCompleted, setSecondStepCompleted] = useState(false);
   const [code, setCode] = useState('');
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+        try {
+            // Assuming you have the token stored in localStorage or a cookie
+            const token = localStorage.getItem(ACCESS_TOKEN);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/api/user/`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setUser(response.data.id);
+        } catch (error) {
+            console.log('Failed to fetch user data:' + error);
+        }
+    };
+    fetchUserData();
+}, []);
 
   return (
     <div className="flex flex-col text-slate-900">
@@ -30,11 +51,11 @@ export default function Home() {
           firstStepIsCompleted={firstStepCompleted} 
           setSecondStepIsCompleted={setSecondStepCompleted} 
           dataForPrompt={dataForPrompt}
-          code={code}
+          user={user}
           setCode={setCode}/>
           <h2 className="text-xl font-semibold mb-4">3. Resultado final
           </h2>
-          <FinalResult seconStepCompleted={secondStepCompleted}/>
+          <FinalResult seconStepCompleted={secondStepCompleted} user={user}/>
         </div>
       </div>
     </div>

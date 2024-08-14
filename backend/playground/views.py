@@ -3,12 +3,17 @@ import traceback
 import requests
 import io
 import sys
+from rest_framework import status
 import pandas as pd
 from django.http import JsonResponse
 import os
 from django.core.files.storage import FileSystemStorage
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.response import Response
+from .serializers import TemplatesSerializer 
+from rest_framework.permissions import AllowAny
 import json
+from rest_framework.decorators import api_view, permission_classes
 from .models import Templates
 
 @csrf_exempt
@@ -71,15 +76,12 @@ def execute_code(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         code = data.get('code')
-        user_id = data.get('user_id')
+        user = data.get('user')
 
-        if not code or not user_id:
-                return JsonResponse({'error': 'Missing code or user ID'}, status=400)
+        if not code or not user:
+                return JsonResponse({'error': 'Missing code or user'}, status=400)
             
 
-        if not code or not user_id:
-            return JsonResponse({'error': 'Missing code or user ID'}, status=400)
-        
         try:
             # Redirect stdout to capture print statements if needed
             old_stdout = sys.stdout
@@ -102,10 +104,10 @@ def execute_code(request):
 
  
             # Save the template info to the database
-            # Templates.objects.create(
-            #     id_user=request.user,
-            #     link_template=file_path
-            # )
+            Templates.objects.create(
+                id_user=user,
+                link_template=backend_dir
+            )
 
             return JsonResponse({'message': 'All is OK'})
 
@@ -115,3 +117,28 @@ def execute_code(request):
 
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_templates(request):
+
+    try:
+        user_id = request.query_params.get('userId')
+
+        if not user_id:
+            return Response({'error': 'userId parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Fetch templates associated with the user
+        templates = Templates.objects.filter(id_user=user_id).order_by('-date_created')
+        
+        if not templates.exists():
+            return Response({'message': 'No templates found for the given user'}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Serialize the templates
+        serializer = TemplatesSerializer(templates, many=True)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
