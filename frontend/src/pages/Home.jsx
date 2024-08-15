@@ -52,7 +52,8 @@ export default function Home() {
           setSecondStepIsCompleted={setSecondStepCompleted} 
           dataForPrompt={dataForPrompt}
           user={user}
-          setCode={setCode}/>
+          setCode={setCode}
+          requirements = {requirements}/>
           <h2 className="text-xl font-semibold mb-4">3. Resultado final
           </h2>
           <FinalResult seconStepCompleted={secondStepCompleted} user={user}/>

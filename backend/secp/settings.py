@@ -157,3 +157,6 @@ CORS_ALLOWS_CREDENTIALS = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
 MEDIA_URL = '/files/'
 
+# APPEND_SLASH = False
+
+

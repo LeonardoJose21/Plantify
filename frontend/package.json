@@ -27,6 +27,7 @@
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "js-file-download": "^0.4.12",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.400.0",
     "path": "^0.12.7",

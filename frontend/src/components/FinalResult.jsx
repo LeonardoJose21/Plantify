@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
+import fileDownload from 'js-file-download';
 
 export default function FinalResult({ seconStepCompleted, user }) {
     const [templates, setTemplates] = useState([]);
@@ -15,7 +16,7 @@ export default function FinalResult({ seconStepCompleted, user }) {
                         userId: user
                     }
                 });
-    
+
                 if (response.status === 200) {
                     setTemplates(response.data);
                 } else {
@@ -25,16 +26,23 @@ export default function FinalResult({ seconStepCompleted, user }) {
                 console.error('Error fetching templates:', error);
             }
         }
-    
+
         if (user) {
             fetchTemplates();
         }
-    }, [user]);
-    
+    }, [user, seconStepCompleted]);
 
-    const handleDownload = (link) => {
-        // Handle template download
-        window.location.href = link;
+
+    const handleDownload = (filename) => {
+        axios.post(`${import.meta.env.VITE_API_URL}playground/api/download`, {
+            filename: filename
+        }, {
+            responseType: 'blob',
+        }).then(response => {
+            fileDownload(response.data, filename);
+        }).catch(error => {
+            console.error('Download failed:', error);
+        });
     };
 
     return (
@@ -56,19 +64,23 @@ export default function FinalResult({ seconStepCompleted, user }) {
                     </div>
                 )}
             </div>
-            <div className='w-full md:w-1/2'>
+            <div className='w-full md:w-1/2 min-h-80 overflow-y-scroll overflow-x-hidden'>
                 <h2 className='text-lg font-semibold mb-4'>Mis Plantillas</h2>
                 {templates.length > 0 ? (
-                    templates.map(template => (
-                        <div key={template.id_template} className='mb-4 p-4 border rounded-md'>
-                            <p><strong>Descripción:</strong> {template.description}</p>
-                            <p><strong>Fecha de Creación:</strong> {new Date(template.date_created).toLocaleString()}</p>
-                            <Button
-                                onClick={() => handleDownload(template.link_template)}
-                                className="mt-2 px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                Descargar
-                            </Button>
-                        </div>
+                    templates.map((template, index) => (
+                        (seconStepCompleted ? index < templates.length - 1 : true) && (
+                            <div key={template.id_template} className='mb-4 p-2 border border-slate-400 rounded-md'>
+                                <p className='text-sm'>{template.description}</p>
+                                <div className='flex flex-row justify-between items-center'>
+                                    <p className='text-xs'>{new Date(template.date_created).toLocaleString()}</p>
+                                    <Button
+                                        onClick={() => handleDownload(template.link_template)}
+                                        className="mt-2 px-2 py-1 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                        Descargar
+                                    </Button>
+                                </div>
+                            </div>
+                        )
                     ))
                 ) : (
                     <p>No tienes plantillas disponibles.</p>

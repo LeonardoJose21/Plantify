@@ -62,7 +62,7 @@ export default function StoreData({ bizName, setBizName, requirements, setRequir
                     value={requirements}
                 />
             </div>
-            <Button onClick={handleDataStore} disabled={btnIsUsed} className='w-full md:w-2/5 md:mr-0 md:ml-auto'> Continuar {loading ? <Loader/>:null} </Button>
+            <Button onClick={handleDataStore} disabled={btnIsUsed || loading} className='w-full md:w-2/5 md:mr-0 md:ml-auto'> Continuar {loading ? <Loader/>:null} </Button>
         </div>
     );
 }

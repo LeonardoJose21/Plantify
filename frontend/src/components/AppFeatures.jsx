@@ -4,7 +4,7 @@ import { Loader, Lock } from "lucide-react";
 import { getGeneratedCode } from '../services/generateCode';
 import axios from 'axios';
 
-export default function AppFeatures({ firstStepIsCompleted, setSecondStepIsCompleted, dataForPrompt, user, setCode }) {
+export default function AppFeatures({ firstStepIsCompleted, setSecondStepIsCompleted, dataForPrompt, user, setCode, requirements }) {
     const [loading, setLoading] = useState(false);
     const [btnIsUsed, setBtnIsUsed] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -30,7 +30,6 @@ export default function AppFeatures({ firstStepIsCompleted, setSecondStepIsCompl
 
     const handleFeatures = () => {
         setLoading(true);
-        setRetryCount(0);
         executeRequest();
     };
 
@@ -42,7 +41,8 @@ export default function AppFeatures({ firstStepIsCompleted, setSecondStepIsCompl
                 return axios.post(import.meta.env.VITE_API_URL + 'playground/api/execute-code/',
                     {
                         code: parsedCode,
-                        user: user,  
+                        user: user, 
+                        description: requirements 
                     }, {
                         headers: {
                             'Content-Type': 'application/json'
@@ -55,6 +55,7 @@ export default function AppFeatures({ firstStepIsCompleted, setSecondStepIsCompl
                     setSecondStepIsCompleted(true);
                     setBtnIsUsed(true);
                     setSuccess(true);
+                    setFailure('')
                     setLoading(false);
                 }  else if (response.data.error) {
                     setFailure("Error: "+response.data.error);
@@ -71,8 +72,9 @@ export default function AppFeatures({ firstStepIsCompleted, setSecondStepIsCompl
         firstStepIsCompleted ? (
             <div className='flex flex-col space-y-4 p-4'>
                 <p>Genial, ya tenemos los requisitos de tu negocio, ahora es hora de generar tu plantilla de inventario</p>
-                <Button onClick={handleFeatures} disabled={btnIsUsed} className='w-full md:w-2/5 md:mr-0 md:ml-auto'>Generar {loading ? < Loader className='ml-3' /> : null}</Button>
-                {success || !failure ? <span className='bg-slate-900 p-2 w-4/5 md:w-3/5 md:ml-0 md:mr-auto mx-auto rounded mt-6 text-white'>¡Tu plantilla ha sido generada con exito! Debajo podrás encontrar el like para descargarla :) </span>: <span className='bg-red-500 p-2 w-4/5 mx-auto rounded mt-6 md:w-3/5 md:ml-0 md:mr-auto text-white'> {failure} </span>}
+                <Button onClick={handleFeatures} disabled={btnIsUsed || loading} className='w-full md:w-2/5 md:mr-0 md:ml-auto'>Generar {loading ? < Loader className='ml-3' /> : null}</Button>
+                {success  &&  <span className='bg-slate-900 p-2 w-4/5 md:w-3/5 md:ml-0 md:mr-auto mx-auto rounded mt-6 text-white'>¡Tu plantilla ha sido generada con exito! Debajo podrás encontrar el like para descargarla :) </span> }
+                { failure &&  <span className='bg-red-500 p-2 w-4/5 mx-auto rounded mt-6 md:w-3/5 md:ml-0 md:mr-auto text-white'> {failure} </span>}
                 <span>
 
                 </span>
