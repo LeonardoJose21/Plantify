@@ -31,7 +31,7 @@ def chatgpt_api(request):
             'Content-Type': 'application/json'
         }
         payload = {
-            'model': 'gpt-3.5-turbo',
+            'model': 'gpt-4',
             'messages': [{'role': 'user', 'content': user_input}],
         }
 
@@ -199,3 +199,28 @@ def downloadTemplate(request):
         response =  HttpResponse(f.read(), content_type="application/vnd.ms-excel")
         response['Content-Disposition'] = f'attachment; filename="{os.path.basename(path_to_file)}"'
         return response
+    
+@api_view(['DELETE'])
+@permission_classes([AllowAny])
+def delete_template(request, id_template):
+    try:
+        # Fetch the template from the database
+        template = Templates.objects.get(id_template=id_template)
+        
+        # Construct the full file path
+        file_path = os.path.join(settings.MEDIA_ROOT, template.link_template)
+        
+        # Delete the file if it exists
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        else:
+            return Response({'error': 'File not found on the server.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Delete the template record from the database
+        template.delete()
+        
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except Templates.DoesNotExist:
+        return Response({'error': 'Template not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

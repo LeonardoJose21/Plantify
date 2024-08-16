@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"
 import {
-  BrowserRouter, Routes, Route, Navigate
+  BrowserRouter, Routes, Route
 } from "react-router-dom";
-import axios from "axios";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
@@ -10,7 +9,6 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import './index.css';
 import Header from "./components/Header";
-import { ProblemProvider } from "./ProblemContext";
 import { ACCESS_TOKEN } from "./constants";
 import LandingPage from "./pages/landing";
 
@@ -18,7 +16,6 @@ import LandingPage from "./pages/landing";
 
 const LogOut = () => {
   localStorage.clear()
-  return <Navigate to="/login" />
 }
 
 function RegisterAndLogout() {
@@ -45,9 +42,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <ProblemProvider>
-                <Home />
-              </ProblemProvider>
+              <Home />
             </ProtectedRoute>
           }
         />

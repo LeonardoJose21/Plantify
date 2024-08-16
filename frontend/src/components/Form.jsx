@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { useNavigate } from 'react-router-dom';
 import api from '../api'; // Adjust the path as necessary
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants'; // Adjust the path as necessary
-import LoadingIndicator from '@/components/LoadingIndicator'; // Adjust the path as necessary
 import { Loader2 } from 'lucide-react';
 
 const AuthForm = ({ method, route }) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lock } from "lucide-react";
+import { Download, Lock, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import fileDownload from 'js-file-download';
@@ -45,6 +45,22 @@ export default function FinalResult({ seconStepCompleted, user }) {
         });
     };
 
+    const handleDelete = async (id_template) => {
+        try {
+          const response = await axios.delete(`${import.meta.env.VITE_API_URL}playground/api/templates/${id_template}/`);
+          if (response.status === 204) {
+            alert('Plantilla eliminada exitosamente.');
+            // Refresh the list of templates, or remove the deleted template from the state
+            setTemplates(templates.filter(template => template.id_template !== id_template));
+          } else {
+            alert('Hubo un error al eliminar la plantilla.');
+          }
+        } catch (error) {
+          console.error('Error deleting template:', error);
+          alert('Hubo un error al eliminar la plantilla.');
+        }
+      };
+
     return (
         <div className='flex flex-col md:flex-row'>
             <div className='w-full md:w-1/2'>
@@ -73,11 +89,18 @@ export default function FinalResult({ seconStepCompleted, user }) {
                                 <p className='text-sm'>{template.description}</p>
                                 <div className='flex flex-row justify-between items-center'>
                                     <p className='text-xs'>{new Date(template.date_created).toLocaleString()}</p>
-                                    <Button
-                                        onClick={() => handleDownload(template.link_template)}
-                                        className="mt-2 px-2 py-1 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                        Descargar
-                                    </Button>
+                                    <div className='flex space-x-2'>
+                                        <Button
+                                            onClick={() => handleDownload(template.link_template)}
+                                            className="mt-2 px-2 py-1 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                            <Download />
+                                        </Button>
+                                        <Button
+                                            onClick={() => handleDelete(template.id_template)}
+                                            className="mt-2 px-2 py-1 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                                            <Trash />
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         )
@@ -86,6 +109,7 @@ export default function FinalResult({ seconStepCompleted, user }) {
                     <p>No tienes plantillas disponibles.</p>
                 )}
             </div>
+
         </div>
     );
 }

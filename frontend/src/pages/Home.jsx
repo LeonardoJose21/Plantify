@@ -36,7 +36,7 @@ export default function Home() {
     <div className="flex flex-col text-slate-900">
       <div className="flex flex-1 flex-col">
         <div className="p-5 border-b md:border-b-0 md:border-r border-gray-300 flex-1">
-          <h2 className="text-xl font-semibold mb-4">1. Datos de la tienda</h2>
+          <h2 className="text-xl font-semibold mb-4">1. Datos del negocio</h2>
           <StoreData
             bizName={bizName}
             requirements={requirements}

@@ -24,7 +24,7 @@ export default function Caracteristicas() {
         </li>
         <li className="flex items-center space-x-2 animate-fade-in-out" style={{ animationDelay: '0.8s' }}>
           <CheckIcon className="w-6 h-6 text-green-400" />
-          <span>Ahorro de tiempo y dinero en la gcreación de inventarios.</span>
+          <span>Ahorro de tiempo y dinero en la creación de inventarios en excel.</span>
         </li>
       </ul>
     </section>

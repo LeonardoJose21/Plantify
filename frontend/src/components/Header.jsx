@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = ({ userIsLoggedIn, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const isLandingPage = location.pathname === '/landing';
   const isLoginPage = location.pathname === '/login';
   const isRegisterPage = location.pathname === '/register';
+
+  const handleLogout = () => {
+    onLogout();  // Clear the local storage
+    navigate('/login');  // Redirect to the login page
+  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -62,7 +68,7 @@ const Header = ({ userIsLoggedIn, onLogout }) => {
         <div className="flex items-center space-x-4">
           {!isLoginPage && !isRegisterPage && (
             <Button
-              onClick={onLogout}
+              onClick={handleLogout}
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
             >
               {userIsLoggedIn ? 'Cerrar Sesión' : 'Iniciar Sesión'}
